@@ -20,6 +20,7 @@ while stop_word not in ['no', 'n', 'nope', 'nah']:
     c4 = input('Should the password contain uppercase letters ABCDEFGHIJKLMNOPQRSTUVWXYZ? ').lower().strip()
     c5 = input('Should the password contain lowercase letters abcdefghijklmnopqrstuvwxyz? ').lower().strip()
     c6 = input('Should the password contain the characters !#$%&*+-=?@^_? ').lower().strip()
+    c7 = input('Do you want to save passwords to a file? (Yes/No): ').lower().strip()
 
     l = []
     if c3 in ['yes', 'y', 'ye', 'yeah', 'yep', 'yup']:
@@ -36,6 +37,7 @@ while stop_word not in ['no', 'n', 'nope', 'nah']:
             print()
             print('==================================================')
             print(f'Generated passwords: {c1}')
+            passwords_list = []
             for i in range(c1):
                 password = ''
                 for j in range(length):
@@ -48,7 +50,13 @@ while stop_word not in ['no', 'n', 'nope', 'nah']:
                         password += uppercase_letters[random.randint(0, len(uppercase_letters) - 1)]
                     elif m == '!#$%&*+-=?@^_':
                         password += symbols[random.randint(0, len(symbols) - 1)]
+                passwords_list.append(password)
                 print(password)
+            if c7 in ['yes', 'y', 'ye', 'yeah', 'yep', 'yup']:
+                with open("passwords.txt", "w") as file:
+                    file.write("\n".join(passwords_list))
+                print()
+                print("Passwords have been saved to passwords.txt")
                 
         generate_password(c2)
         print()
